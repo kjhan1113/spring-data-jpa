@@ -16,7 +16,7 @@ public class SpringdatajpaApplication {
         SpringApplication.run(SpringdatajpaApplication.class, args);
     }
 
-    @Bean
+/*    @Bean
     CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
         return args -> {
             Student john_doe = new Student("John", "Doe", "johndoe@nobody.com", 21);
@@ -78,5 +78,5 @@ public class SpringdatajpaApplication {
                     .findByAgeBetween(20, 21)
                     .forEach(System.out::println);
         };
-    }
+    }*/
 }
