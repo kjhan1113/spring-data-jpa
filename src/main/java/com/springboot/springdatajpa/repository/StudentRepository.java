@@ -18,6 +18,12 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByLastNameAndAgeOrderByFirstNameAsc(String lastName, int age);
     List<Student> findByEmailContaining(String keyword); // like query
     List<Student> findByAgeBetween(int startAge, int endAge); // between query
+    List<Student> findByFirstNameStartingWith(String firstName);
+    List<Student> findByFirstNameEndingWith(String firstName);
+    List<Student> findByLastNameNot(String listName);
+    List<Student> findByLastNameIn(List<String> list);
+    List<Student> findByLastNameNotIn(List<String> list);
+    List<Student> findByFirstNameIgnoreCase(String firstName);
 
     @Query("SELECT s FROM Student s WHERE s.email = ?1")
     Optional<Student> findStudentByEmailWithQuery(String email);

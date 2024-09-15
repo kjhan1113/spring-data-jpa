@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,5 +125,42 @@ class StudentRepositoryTest {
         // Then
         assertThat(students).hasSize(1);
         assertThat(students.getFirst().getFirstName()).isEqualTo("Jim");
+    }
+
+    @Test
+    public void testFindByFirstNameStartingWith() {
+        List<Student> students = studentRepository.findByFirstNameStartingWith("Ji");
+        assertThat(students).hasSize(1);
+    }
+
+    @Test
+    public void testFindByFirstNameEndingWith() {
+        List<Student> students = studentRepository.findByFirstNameEndingWith("im");
+        assertThat(students).hasSize(1);
+    }
+
+    @Test
+    public void testFindByLastNameNot() {
+        List<Student> students = studentRepository.findByLastNameNot("Doe");
+        assertThat(students).isNotEmpty();
+        assertThat(students).hasSize(2);
+    }
+
+    @Test
+    public void testFindByLastNameIn() {
+        List<Student> students = studentRepository.findByLastNameIn(Arrays.asList("Doe", "Smith"));
+        assertThat(students).hasSize(3);
+    }
+
+    @Test
+    public void testFindByLastNameNotIn() {
+        List<Student> students = studentRepository.findByLastNameNotIn(Arrays.asList("Doe", "Smith"));
+        assertThat(students).hasSize(1);
+    }
+
+    @Test
+    public void testFindByFirstNameIgnoreCase() {
+        List<Student> students = studentRepository.findByFirstNameIgnoreCase("JOHN");
+        assertThat(students).hasSize(2);
     }
 }
